@@ -191,3 +191,6 @@ df_birthrate_state <- inner_join(df_pop_state, df_birth_state)
 ### Compute birth rates
 df_birthrate_state <- df_birthrate_state %>%
   mutate(birth_rate = births/population)
+
+### Save Birth Rate Projections data.frame
+save(df_birthrate_state, file = "data/df_birthrate_state.Rdata")
