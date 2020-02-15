@@ -194,3 +194,109 @@ df_birthrate_state <- df_birthrate_state %>%
 
 ### Save Birth Rate Projections data.frame
 save(df_birthrate_state, file = "data/df_birthrate_state.Rdata")
+
+# *****************************************************************************
+#### 01.05 Mortality Projections ####
+# *****************************************************************************
+### Load data with Spanish encoding
+df_mort_state_age_sex <- data.table::fread(input = "data-raw/def_edad_proyecciones.csv",
+                                           encoding="Latin-1")
+### Rename variables
+df_mort_state_age_sex <- df_mort_state_age_sex %>%
+  rename(year = AÑO,
+         state = ENTIDAD,
+         age = EDAD,
+         deaths = DEFUNCIONES)
+
+### Rename and recode sex
+df_mort_state_age_sex <- df_mort_state_age_sex %>%
+  mutate(SEXO = factor(SEXO)) %>%
+  rename(sex = SEXO)
+
+levels(df_mort_state_age_sex$sex)[levels(df_mort_state_age_sex$sex) == "Hombres"] = "Male"
+levels(df_mort_state_age_sex$sex)[levels(df_mort_state_age_sex$sex) == "Mujeres"] = "Female"
+
+### Recode States
+df_mort_state_age_sex <- df_mort_state_age_sex %>%
+  mutate(state = replace(state, state == "Aguascalientes", "01"),
+         state = replace(state, state == "Baja California", "02"),
+         state = replace(state, state == "Baja California Sur", "03"),
+         state = replace(state, state == "Campeche", "04"),
+         state = replace(state, state == "Coahuila", "05"),
+         state = replace(state, state == "Colima", "06"),
+         state = replace(state, state == "Chiapas", "07"),
+         state = replace(state, state == "Chihuahua", "08"),
+         state = replace(state, state == "Ciudad de México", "09"),
+         state = replace(state, state == "Durango", "10"),
+         state = replace(state, state == "Guanajuato", "11"),
+         state = replace(state, state == "Guerrero", "12"),
+         state = replace(state, state == "Hidalgo", "13"),
+         state = replace(state, state == "Jalisco", "14"),
+         state = replace(state, state == "México", "15"),
+         state = replace(state, state == "Michoacán", "16"),
+         state = replace(state, state == "Morelos", "17"),
+         state = replace(state, state == "Nayarit", "18"),
+         state = replace(state, state == "Nuevo León", "19"),
+         state = replace(state, state == "Oaxaca", "20"),
+         state = replace(state, state == "Puebla", "21"),
+         state = replace(state, state == "Querétaro", "22"),
+         state = replace(state, state == "Quintana Roo", "23"),
+         state = replace(state, state == "San Luis Potosí", "24"),
+         state = replace(state, state == "Sinaloa", "25"),
+         state = replace(state, state == "Sonora", "26"),
+         state = replace(state, state == "Tabasco", "27"),
+         state = replace(state, state == "Tamaulipas", "28"),
+         state = replace(state, state == "Tlaxcala", "29"),
+         state = replace(state, state == "Veracruz", "30"),
+         state = replace(state, state == "Yucatán", "31"),
+         state = replace(state, state == "Zacatecas", "32"),
+         state = replace(state, state == "República Mexicana", "33"))
+
+df_mort_state_age_sex <- df_mort_state_age_sex %>%
+  mutate(state = as.factor(state))
+
+levels(df_mort_state_age_sex$state) <- v_names_states
+
+### Compute general estimates NOT by sex
+df_mort_state_age <- df_mort_state_age_sex %>%
+  group_by(year, state, CVE_GEO, age) %>%
+  summarise(deaths = sum(deaths))
+
+### Compute general estimates NOT by age
+df_mort_state <- df_mort_state_age %>%
+  group_by(year, state, CVE_GEO) %>%
+  summarise(deaths = sum(deaths))
+
+### Save Mortality Projections data.frames
+save(df_mort_state_age_sex, file = "data/df_mort_state_age_sex.Rdata")
+save(df_mort_state_age,     file = "data/df_mort_state_age.Rdata")
+save(df_mort_state,         file = "data/df_mort_state.Rdata")
+
+# *****************************************************************************
+#### 01.06 Mortality Rates Projections ####
+# *****************************************************************************
+### Load population and mortality projections
+load("data/df_pop_state.Rdata")
+load("data/df_pop_state_age.Rdata")
+load("data/df_pop_state_age_sex.Rdata")
+load("data/df_mort_state.Rdata")
+load("data/df_mort_state_age.Rdata")
+load("data/df_mort_state_age_sex.Rdata")
+
+### Join data.frames
+df_mortrate_state <- inner_join(df_pop_state, df_mort_state)
+df_mortrate_state_age <- inner_join(df_pop_state_age, df_mort_state_age)
+df_mortrate_state_age_sex <- inner_join(df_pop_state_age_sex, df_mort_state_age_sex)
+
+### Compute mortality rates
+df_mortrate_state <- df_mortrate_state %>%
+  mutate(mort_rate = deaths/population)
+df_mortrate_state_age <- df_mortrate_state_age %>%
+  mutate(mort_rate = deaths/population)
+df_mortrate_state_age_sex <- df_mortrate_state_age_sex %>%
+  mutate(mort_rate = deaths/population)
+
+### Save Birth Rate Projections data.frame
+save(df_mortrate_state, file = "data/df_mortrate_state.Rdata")
+save(df_mortrate_state_age, file = "data/df_mortrate_state_age.Rdata")
+save(df_mortrate_state_age_sex, file = "data/df_mortrate_state_age_sex.Rdata")
