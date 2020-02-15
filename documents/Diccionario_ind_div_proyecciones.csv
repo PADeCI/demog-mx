@@ -1,0 +1,44 @@
+Diccionario de Datos de la base de datos de Indicadores diversos (ind_div_proyecciones.csv),,
+,,
+RENGLON,Identificador único de caso (Llave primaria),
+AÑO,Año,
+ENTIDAD,Nombre de entidad federativa,
+CVE_GEO,Clave geográfica (INEGI 2010) de entidad federativa,
+T_INC_PAL,Tasa de incidencia asociada al paludismo,"Número de casos confirmados de paludismo con prueba diagnóstica de gota gruesa positiva, en un determinado año respecto a la población total en ese mismo año, por cada 100 mil habitantes. "
+T_INC_TUB,Tasa de incidencia de tuberculosis pulmonar,Número de casos confirmados de tuberculosis pulmonar por cada 100 mil habitantes (de todas las edades)
+T_MOR_DIAR,Tasa de mortalidad en niños menores de 5 años por enfermedades diarreicas (EDAS),Número de defunciones en los menores de 5 años de edad por enfermedades diarreicas por cada 100 mil menores de 5 años 
+T_MOR_INFE,Tasa de mortalidad en niños menores de 5 años por infecciones respiratorias agudas  (IRAS),Número de defunciones en menores de 5 años de edad por enfermedades respiratorias agudas por cada 100 mil menores de 5 años
+T_MOR_VEH,Tasa de mortalidad por accidentes de tránsito de vehículo de motor (ambos sexos),"Número de defunciones por accidentes de vehículos de motor (tránsito) de personas entre 12 y 29 años, por cada 100 mil personas entre 12 y 29 años de edad"
+T_MOR_VEH_HOM,Tasa de mortalidad por accidentes de tránsito de vehículo de motor (hombres),"Número de defunciones por accidentes de vehículos de motor (tránsito) de hombres entre 12 y 29 años, por cada 100 mil hombres entre 12 y 29 años de edad"
+T_MOR_VEH_MUJ,Tasa de mortalidad por accidentes de tránsito de vehículo de motor (mujeres),"Número de defunciones por accidentes de vehículos de motor (tránsito) de mujeres entre 12 y 29 años, por cada 100 mil mujeres entre 12 y 29 años de edad"
+T_MOR_CER_UTE,Tasa de mortalidad por cáncer cérvico-uterino,Número de defunciones de mujeres de 25 años y más por tumor maligno del cuello uterino (Código CIE 10: C53) por cada 100 mil mujeres de 25 años y más
+T_MOR_CAN_MAM,Tasa de mortalidad por cáncer de mama (mujeres),Número de defunciones de mujeres de 25 años y más por tumor maligno de mama (CIE 10: C50) por cada 100 mil mujeres de 25 años y más
+T_MOR_CAN_PROS,Tasa de mortalidad por cáncer de prostata (45 años y mas),"Número de defunciones por tumor maligno de la próstata de hombres de 45 años y más, por cada 100 mil hombres de 45 años y más"
+T_MOR_CAN_TEST,Tasa de mortalidad por cáncer testicular,"Número de defunciones por tumor maligno en testículos, por cada 100 mil hombres"
+T_MOR_DIA,Tasa de mortalidad por diabetes mellitus (ambos sexos),Número de defunciones por diabetes mellitus por cada 100 mil habitantes
+T_MOR_DIA_HOM,Tasa de mortalidad por diabetes mellitus (hombres),Número de defunciones de hombres por diabetes mellitus por cada 100 mil hombres
+T_MOR_DIA_MUJ,Tasa de mortalidad por diabetes mellitus (mujeres),Número de defunciones de mujeres por diabetes mellitus por cada 100 mil mujeres
+T_MOR_ENF_ISQ,Tasa de mortalidad por enfermedades isquémicas del corazón,Número de defunciones por enfermedades isquémicas del corazón por cada 100 mil habitantes
+T_MOR_HIP_ART,Tasa de mortalidad por hipertensión arterial,Número de defunciones por hipertensión arterial por cada 100 mil habitantes
+T_MOR_HOMI,Tasa de mortalidad por homicidios (ambos sexos),Número de defunciones por homicidios por cada 100 mil habitantes
+T_MOR_HOMI_HOM,Tasa de mortalidad por homicidios (hombres),Número de defunciones por homicidios perpetrados contra hombres por cada 100 mil hombres
+T_MOR_HOMI_MUJ,Tasa de mortalidad por homicidios (mujeres),Número de defunciones por homicidios perpetrados contra mujeres por cada 100 mil mujeres
+T_MOR_SUI,Tasa de mortalidad por suicidio en jóvenes (10 a 29 años),"Número de defunciones por lesiones autoinfligidas intencionalmente (suicidios) de personas entre 10 y 29 años, por cada 100 mil jóvenes entre 10 y 29 años de edad"
+T_MOR_TUBER,Tasa de mortalidad por tuberculosis pulmonar ,Número de defunciones por tuberculosis pulmonar por cada 100 mil habitantes
+T_MOR_VIH,Tasa de mortalidad por VIH/SIDA ,"Número de defunciones por VIH/SIDA, por cada 100 mil habitantes"
+T_COB_MEDIA,Tasa neta de cobertura en educación media superior,"Porcentaje de población en edad de 15 a 17 años matriculada en el nivel de educación media superior al inicio del ciclo escolar, respecto a la población de 15 a 17 años"
+T_COB_PREE,Tasa neta de cobertura en preescolar,"Porcentaje de población en edad de 3 a 5 años matriculada en el nivel de preescolar al inicio del ciclo escolar, respecto a la población de 3 a 5 años"
+T_COB_PRI,Tasa neta de cobertura en primaria,"Porcentaje de población en edad de 6 a 11 años matriculada en el nivel de primaria al inicio del ciclo escolar, respecto a la población de 6 a 11 años"
+T_COB_SEC,Tasa neta de cobertura en secundaria,"Porcentaje de población en edad de 12 a 14 años matriculada en el nivel de secundaria al inicio del ciclo escolar, respecto a la población de 12 a 14 años"
+T_MATR_PREE,Tasa neta de matriculación en educación preescolar (3 a 5 años de edad),"Porcentaje de la población de 3 a 5 años de edad matriculada en educación preescolar, respecto a la población total de 3 a 5 años de edad."
+T_MATR_PRI,Tasa neta de matriculación en la enseñanza primaria (6 a 11 años de edad),"Porcentaje de la población de 6 a 11 años de edad matriculada en educación primaria, respecto a la población total de 6 a 11 años de edad."
+T_MATR_SEC,Tasa neta de matriculación en secundaria (12 a 14 años de edad),"Porcentaje de la población de 12 a 14 años de edad matriculada en educación secundaria, respecto a la población total de 12 a 14 años de edad."
+,,
+Fuentes:,,
+,"CONAPO. Conciliación demográfica de México 1950-2015 y Proyecciones de la población de México y de las entidades federativas, 2016-2050.",
+,"INEGI/SALUD. Bases de datos de las defunciones, 1990-2015",
+,"ONUSIDA, SALUD. Estimaciones de personas adultas con VIH, UNPD.",
+,SALUD. Recursos para la Salud.,
+,SALUD. Sistema Nacional de Vigilancia Epidemiológica.,
+,SALUD. Subsistema de Prestación de Servicios y Registros de las Instituciones de Salud.,
+,SEP. Bases de datos del formato 911 de educación básica y media superior (inicio del ciclo escolar).,

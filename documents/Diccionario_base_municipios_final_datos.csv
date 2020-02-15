@@ -1,0 +1,16 @@
+"Diccionario de Datos de la base de datos de Proyecciones de la Población de los Municipios de México , 2015-2030 (base_municipios_final_datos_01 y base_municipios_final_datos_02)*",
+,
+RENGLON,Identificador único de caso (Llave primaria)
+CLAVE,Clave geográfica (INEGI 2010) de municipio
+CLAVE_ENT,Clave geográfica (INEGI 2010) de entidad federativa
+NOM_ENT,Nombre de la entidad federativa
+MUN,Nombre del municipio
+SEXO,Sexo
+AÑO,Año
+EDAD_QUIN,Grupo quinquenal de edad (se agrupa a toda la población de 65 años y más)
+POB,Población a mitad de año
+,
+"* La base ""base_municipios_final_datos_01"" contiene la población de los municipios que conforman las entidades de Aguascalientes, Baja California, Baja California Sur, Campeche, Coahuila, Colima, Chiapas, ",
+"Chihuahua, Ciudad de México, Durango, Guanajuato, Guerrero, Hidalgo, Jalisco, México, Michoacán, Morelos, Nayarit y Nuevo León.",
+"* La base ""base_municipios_final_datos_02"" contiene la población de los municipios que conforman las entidades de Oaxaca, Puebla, Querétaro, Quintana Roo, San Luis Potosí, Sinaloa, Sonora, Tabasco, Tamaulipas, Tlaxcala, Veracruz, Yucatán y Zacatecas.",
+"Fuente: Proyecciones de la Población de México y de las Entidades Federativas, 2016-2050 y Proyecciones de los Municipios de México, 2015-2030.",

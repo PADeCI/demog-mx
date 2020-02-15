@@ -1,0 +1,80 @@
+Diccionario de Datos de la base de datos de Indicadores demográficos (ind_dem_proyecciones.csv),
+,
+RENGLON,Identificador único de caso (Llave primaria)
+AÑO,Año
+ENTIDAD,Nombre de entidad federativa
+CVE_GEO,Clave geográfica (INEGI 2010) de entidad federativa
+CRE_NAT,Crecimiento natural
+CRE_SOC,Crecimiento social
+CRE_TOT,Crecimiento total
+DEF,Defunciones
+EDAD_MED,Edad mediana
+EMI_EST,Emigrantes interestatales
+EMI_INT,Emigrantes internacionales
+EVH,Esperanza de vida al nacimiento hombres
+EVM,Esperanza de vida al nacimiento mujeres
+EV,Esperanza de vida al nacimiento total
+HOM_MIT_AÑO,Hombres
+IND_ENV,Índice de Envejecimiento
+INM_EST,Inmigrantes interestatales
+INM_INT,Inmigrantes internacionales
+MIG_NET_EST,Migración neta interestatal
+MIG_NET_INT,Migración neta internacional
+MUJ_MIT_AÑO,Mujeres
+NAC,Nacimientos
+POB_MIT_AÑO,Población a mitad de año
+MUJ_12_14,Mujeres de 12-14 años
+MUJ_15_17,Mujeres de 15-17 años
+MUJ_15_19,Mujeres de 15-19 años
+MUJ_15_29,Mujeres de 15-29 años
+MUJ_15_49,Mujeres de 15-49 años
+MUJ_18_24,Mujeres de 18-24 años
+MUJ_20_24,Mujeres de 20-24 años
+MUJ_3_5,Mujeres de 3-5 años
+MUJ_30_64,Mujeres de 30-64 años
+MUJ_6_11,Mujeres de 6-11 años
+MUJ_65_MAS,Mujeres de 65 años y más
+HOM_12_14,Hombres de 12-14 años
+HOM_15_17,Hombres de 15-17 años
+HOM_15_19,Hombres de 15-19 años
+HOM_15_29,Hombres de 15-29 años
+HOM_15_49,Hombres de 15-49 años
+HOM_18_24,Hombres de 18-24 años
+HOM_20_24,Hombres de 20-24 años
+HOM_3_5,Hombres de 3-5 años
+HOM_30_64,Hombres de 30-64 años
+HOM_6_11,Hombres de 6-11 añs
+HOM_65_MAS,Hombres de 65 años y más
+POB_12_14,Población total de 12-14 años
+POB_15_17,Población total de 15-17 años
+POB_15_19,Población total de 15-19 años
+POB_15_29,Población total de 15-29 años
+POB_15_49,Población total de 15-49 años
+POB_18_24,Población total de 18-24 años
+POB_20_24,Población total de 20-24 años
+POB_3_5,Población total de 3-5 años
+POB_30_64,Población total de 30-64 años
+POB_6_11,Población total de 6-11 años
+POB_65_MAS,Población total de 65 años y más
+RAZ_DEP_ADU,Razón de dependencia adulta**
+RAZ_DEP_INF,Razón de dependencia infantil**
+RAZ_DEP,Razón de dependencia total**
+T_BRU_MOR,Tasa bruta de mortalidad*
+T_BRU_NAT,Tasa bruta de natalidad*
+T_CRE_NAT,Tasa de crecimiento natural**
+T_CRE_SOC,Tasa de crecimiento social**
+T_CRE_TOT,Tasa de crecimiento total**
+T_EMI_EST,Tasa de emigración interestatal**
+T_INM_EST,Tasa de inmigración interestatal**
+T_MIG_NET_EST,Tasa de migración neta interestatal**
+T_MIG_NET_INT,Tasa de migración neta internacional**
+TMIH,Tasa de mortalidad infantil hombres*
+TMIM,Tasa de mortalidad infantil mujeres*
+TMI,Tasa de mortalidad infantil*
+TEF_ADO,Tasa específica de fecundidad adolescente*
+TGF,Tasa global de fecundidad
+,
+* Por mil,
+** Por cien,
+"Nota: Algunas de las variables contienen el valor ""ND"" que significa ""No Disponible""",
+"Fuente: Estimaciones del CONAPO con base en Conciliación demográfica de México 1950-2015, Proyecciones de la población de México y de las entidades federativas, 2016-2050.",

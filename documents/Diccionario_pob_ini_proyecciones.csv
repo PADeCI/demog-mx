@@ -1,0 +1,11 @@
+Diccionario de Datos de la base de datos de Población a inicio de año (pob_ini_proyecciones.csv),
+,
+RENGLON,Identificador único de caso (Llave primaria)
+AÑO,Año
+ENTIDAD,Nombre de entidad federativa
+CVE_GEO,Clave geográfica (INEGI 2010) de entidad federativa
+EDAD,Edad
+SEXO,Sexo
+POBLACION,Población a inicio de año
+,
+"Fuente: Estimaciones del CONAPO con base en Conciliación demográfica de México 1950-2015, Proyecciones de la población de México y de las entidades federativas, 2016-2050.",

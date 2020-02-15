@@ -1,0 +1,12 @@
+Diccionario de Datos de la base de datos de Tasa Específica de Fecundidad y Nacimientos (tef_nac_proyecciones.csv),
+,
+RENGLON,Identificador único de caso (Llave primaria)
+AÑO,Año
+ENTIDAD,Nombre de entidad federativa
+CVE_GEO,Clave geográfica (INEGI 2010) de entidad federativa
+GPO_EDAD,Grupos de edad quinquenal de mujeres en edad fértil
+TASAS (1),Tasa específica de fecundidad
+NACIMIENTOS,Número de nacimientos 
+,
+Nota: (1) Número de nacimientos ocurridos por  cada mil mujeres en un grupo de edad determinado.,
+"Fuente: Estimaciones del CONAPO con base en Conciliación demográfica de México 1950-2015, Proyecciones de la población de México y de las entidades federativas, 2016-2050.",

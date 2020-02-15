@@ -1,0 +1,13 @@
+Diccionario de Datos de la base de datos de Migrantes internacionales por edad y año quinquenales (mig_inter_quin_proyecciones.csv),
+,
+RENGLON,Identificador único de caso (Llave primaria)
+AÑO,Año
+ENTIDAD,Nombre de entidad federativa
+CVE_GEO,Clave geográfica (INEGI 2010) de entidad federativa
+EDAD*,Grupo quinquenal de edad
+SEXO,Sexo
+EMIGRANTES,Emigrantes internacionales
+INMIGRANTES,Inmigrantes internacionales
+,
+* El grupo de edad quinquenal 85--89 también incluye a las personas de 90 y más años de edad.,
+"Fuente: Estimaciones del CONAPO con base en Conciliación demográfica de México 1950-2015, Proyecciones de la población de México y de las entidades federativas, 2016-2050.",
