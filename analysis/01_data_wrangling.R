@@ -28,7 +28,7 @@ library(dplyr)
 # *****************************************************************************
 ### Load data with Spanish encoding
 df_pop_state_age_sex <- data.table::fread(input = "data-raw/pob_ini_proyecciones.csv",
-                                          encoding="Latin-1")
+                                          encoding = "Latin-1")
 
 ### Rename variables
 df_pop_state_age_sex <- df_pop_state_age_sex %>%
@@ -179,24 +179,7 @@ save(df_birth_state_agegrp, file = "data/df_birth_state_agegrp.Rdata")
 save(df_birth_state, file = "data/df_birth_state.Rdata")
 
 # *****************************************************************************
-#### 01.04 Birth Rates Projections ####
-# *****************************************************************************
-### Load population and birth projections
-load("data/df_pop_state.Rdata")
-load("data/df_birth_state.Rdata")
-
-### Join data.frames
-df_birthrate_state <- inner_join(df_pop_state, df_birth_state)
-
-### Compute birth rates
-df_birthrate_state <- df_birthrate_state %>%
-  mutate(birth_rate = births/population)
-
-### Save Birth Rate Projections data.frame
-save(df_birthrate_state, file = "data/df_birthrate_state.Rdata")
-
-# *****************************************************************************
-#### 01.05 Mortality Projections ####
+#### 01.04 Mortality Projections ####
 # *****************************************************************************
 ### Load data with Spanish encoding
 df_mort_state_age_sex <- data.table::fread(input = "data-raw/def_edad_proyecciones.csv",
@@ -271,32 +254,3 @@ df_mort_state <- df_mort_state_age %>%
 save(df_mort_state_age_sex, file = "data/df_mort_state_age_sex.Rdata")
 save(df_mort_state_age,     file = "data/df_mort_state_age.Rdata")
 save(df_mort_state,         file = "data/df_mort_state.Rdata")
-
-# *****************************************************************************
-#### 01.06 Mortality Rates Projections ####
-# *****************************************************************************
-### Load population and mortality projections
-load("data/df_pop_state.Rdata")
-load("data/df_pop_state_age.Rdata")
-load("data/df_pop_state_age_sex.Rdata")
-load("data/df_mort_state.Rdata")
-load("data/df_mort_state_age.Rdata")
-load("data/df_mort_state_age_sex.Rdata")
-
-### Join data.frames
-df_mortrate_state <- inner_join(df_pop_state, df_mort_state)
-df_mortrate_state_age <- inner_join(df_pop_state_age, df_mort_state_age)
-df_mortrate_state_age_sex <- inner_join(df_pop_state_age_sex, df_mort_state_age_sex)
-
-### Compute mortality rates
-df_mortrate_state <- df_mortrate_state %>%
-  mutate(mort_rate = deaths/population)
-df_mortrate_state_age <- df_mortrate_state_age %>%
-  mutate(mort_rate = deaths/population)
-df_mortrate_state_age_sex <- df_mortrate_state_age_sex %>%
-  mutate(mort_rate = deaths/population)
-
-### Save Birth Rate Projections data.frame
-save(df_mortrate_state, file = "data/df_mortrate_state.Rdata")
-save(df_mortrate_state_age, file = "data/df_mortrate_state_age.Rdata")
-save(df_mortrate_state_age_sex, file = "data/df_mortrate_state_age_sex.Rdata")
