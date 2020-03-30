@@ -18,7 +18,7 @@ rm(list = ls()) # to clean the workspace
 # library(foreign)
 library(data.table)
 library(dplyr)
-# library(ggplot2)
+library(ggplot2)
 # library(stringr)
 # library(epitools)
 # library(tidyr)

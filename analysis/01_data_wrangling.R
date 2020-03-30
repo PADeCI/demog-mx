@@ -94,7 +94,7 @@ v_names_states <- c("Aguascalientes", "Baja California",
                     "Nayarit", "Nuevo Leon", "Oaxaca", "Puebla", 
                     "Queretaro", "Quintana Roo", "San Luis Potosi", 
                     "Sinaloa", "Sonora", "Tabasco", "Tamaulipas", 
-                    "Tlaxcala", "Veracruz", "Yucatán", "Zacatecas", 
+                    "Tlaxcala", "Veracruz", "Yucatan", "Zacatecas", 
                     "National")
 levels(df_pop_state_age_sex$state) <- v_names_states
 
@@ -119,7 +119,7 @@ save(df_pop_state,         file = "data/df_pop_state.Rdata")
 # *****************************************************************************
 ### Load data with Spanish encoding
 df_birth_state_agegrp <- data.table::fread(input = "data-raw/tef_nac_proyecciones.csv",
-                                           encoding="Latin-1")
+                                           encoding ="Latin-1")
 ### Rename variables
 df_birth_state_agegrp <- df_birth_state_agegrp %>%
   rename(year = AÑO,
