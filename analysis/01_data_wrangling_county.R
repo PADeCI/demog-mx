@@ -15,8 +15,8 @@ rm(list = ls()) # to clean the workspace
 #### 01.01_Load_packages ####
 # *****************************************************************************
 library(data.table)
-library(dplyr)
-
+library(tidyverse)
+library(splitstackshape)
 
 # *****************************************************************************
 #### 01.02_Load_data####
@@ -32,24 +32,43 @@ df_names <- data.table::fread(input = "~/GitHub/demog-model-mex/data-raw/municip
 # *****************************************************************************
 #### 01.03_Clean_data####
 # *****************************************************************************
+#### 01.03.1 County population
 df_pop_binded <- df_counties_1 %>%
         bind_rows(df_counties_2) %>%
-        rename(year = "AÑO", 
+        rename(year = "AÃ‘O", 
                 entidad = "NOM_ENT",
                 county_name_esp = "MUN", 
                 county_id = "CLAVE") %>%
-        mutate(population = POB) %>%
-        filter(year == 2020) %>%
+        rename(population = "POB", 
+                age_groups = "EDAD_QUIN") %>%
+        filter(year == 2020)
+
+df_pop_binded_sum <- df_pop_binded %>%
         group_by(entidad, county_name_esp, county_id) %>%
         summarise_at("population", sum, na.rm = TRUE)
 
 df_pop_county_full <- df_names %>%
-        left_join(df_pop_binded, by = "county_id")
+        left_join(df_pop_binded_sum, by = "county_id")
 
 # Cleaning for final version
 df_pop_county <- df_pop_county_full %>%
         rename(county_name_esp = county_name_esp.x) %>%
         select(entidad, county_name_esp, county_name_eng, county_id, population)
+
+
+#### 01.03.2 County population per ages
+df_pop_county_ages <- df_pop_binded %>%
+        group_by(entidad, county_name_esp, county_id, age_groups) %>%
+        summarise_at("population", sum, na.rm = TRUE) %>%
+        rename(pop_grouped = "population") %>%
+        mutate(population = pop_grouped/5) %>%
+        uncount(5) %>%
+        mutate(age = 0:69, 
+               age = as.character(age), 
+                age = case_when(age != 69 ~ age,
+                                age == 69 ~ "69+"))
+
+View(df_pop_county_ages)
 
 # *****************************************************************************
 #### 01.04_Save_data####
