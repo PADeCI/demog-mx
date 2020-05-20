@@ -17,10 +17,11 @@ rm(list = ls()) # to clean the workspace
 library(data.table)
 library(dplyr)
 
+
 # *****************************************************************************
 #### 01.02_Load_data####
 # *****************************************************************************
-load(df_pop_county)
+load("~/GitHub/demog-model-mex/data/df_pop_county.Rdata")
 
 
 # *****************************************************************************
@@ -28,21 +29,21 @@ load(df_pop_county)
 # *****************************************************************************
 df_pop_ZMVM_counties <- df_pop_county %>%
   mutate (ZMVM = case_when(county_id == "09002" ~ 1,
-    county_id == "09003"~ 1,
-    county_id == "09004" ~ 1,
-    county_id == "09005"~ 1,
-    county_id == "09006" ~ 1,
-    county_id == "09007"~ 1,
-    county_id == "09008" ~ 1,
-    county_id == "09009"~ 1,
-    county_id == "09010" ~ 1,
-    county_id == "09011"~ 1,
-    county_id == "09012" ~ 1,
-    county_id == "09013"~ 1,
-    county_id == "09014" ~ 1,
-    county_id == "09015"~ 1,
-    county_id == "09016" ~ 1,
-    county_id == "09017"~ 1,
+    county_id == "9003"~ 1,
+    county_id == "9004" ~ 1,
+    county_id == "9005"~ 1,
+    county_id == "9006" ~ 1,
+    county_id == "9007"~ 1,
+    county_id == "9008" ~ 1,
+    county_id == "9009"~ 1,
+    county_id == "9010" ~ 1,
+    county_id == "9011"~ 1,
+    county_id == "9012" ~ 1,
+    county_id == "9013"~ 1,
+    county_id == "9014" ~ 1,
+    county_id == "9015"~ 1,
+    county_id == "9016" ~ 1,
+    county_id == "9017"~ 1,
     county_id == "13069" ~ 1,
     county_id == "15002"~ 1,
     county_id == "15009" ~ 1,
@@ -112,6 +113,10 @@ df_pop_ZMVM <- df_pop_ZMVM_counties %>%
           state = "MCMA",
           county_name_eng = "MCMA") %>%
   select(entidad, county_name_esp, state, county_name_eng, population)
+
+
+# Comprobar población total
+sum(df_pop_ZMVM$population)
 
 # *****************************************************************************
 #### 01.04_Save_data####

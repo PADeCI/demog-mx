@@ -66,9 +66,10 @@ df_pop_county_ages <- df_pop_binded %>%
         mutate(age = 0:69, 
                age = as.character(age), 
                 age = case_when(age != 69 ~ age,
-                                age == 69 ~ "69+"))
+                                age == 69 ~ "69+")) %>%
+        select(entidad, county_name_esp, county_id, age_groups, pop_grouped, age, population)
 
-View(df_pop_county_ages)
+#View(df_pop_county_ages)
 
 # *****************************************************************************
 #### 01.04_Save_data####
