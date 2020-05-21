@@ -75,3 +75,4 @@ df_pop_county_ages <- df_pop_binded %>%
 #### 01.04_Save_data####
 # *****************************************************************************
 save(df_pop_county, file = "~/GitHub/demog-model-mex/data/df_pop_county.Rdata")
+save(df_pop_county_ages, file = "~/GitHub/demog-model-mex/data/df_pop_county_ages.Rdata")
