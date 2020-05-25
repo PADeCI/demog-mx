@@ -28,7 +28,7 @@ load("~/GitHub/demog-model-mex/data/df_pop_county.Rdata")
 #### 01.03_Clean_data####
 # *****************************************************************************
 df_pop_ZMVM_counties <- df_pop_county %>%
-  mutate (ZMVM = case_when(county_id == "09002" ~ 1,
+  mutate (ZMVM = case_when(county_id == "9002" ~ 1,
     county_id == "9003"~ 1,
     county_id == "9004" ~ 1,
     county_id == "9005"~ 1,

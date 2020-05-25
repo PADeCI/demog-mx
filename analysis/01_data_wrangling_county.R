@@ -30,7 +30,7 @@ df_names <- data.table::fread(input = "~/GitHub/demog-model-mex/data-raw/municip
 
 
 # *****************************************************************************
-#### 01.03_Clean_data####
+#### 01.03 Population projections                       ####
 # *****************************************************************************
 #### 01.03.1 County population
 df_pop_binded <- df_counties_1 %>%
@@ -72,7 +72,21 @@ df_pop_county_ages <- df_pop_binded %>%
 #View(df_pop_county_ages)
 
 # *****************************************************************************
-#### 01.04_Save_data####
+#### 01.04 Mortality projections                                           ####
+# *****************************************************************************
+df_mort_county_age <- data.table::fread(input = "data-raw/def_edad_proyecciones.csv",
+        encoding="Latin-1")
+df_mort_county_age <- %>%
+rename(year = "AÑO", 
+        entidad = "NOM_ENT",
+        county_name_esp = "MUN", 
+        county_id = "CLAVE") %>%
+        rename(population = "POB", 
+                age_groups = "EDAD_QUIN") %>%
+        filter(year == 2020)
+
+# *****************************************************************************
+#### 01.05_Save_data####
 # *****************************************************************************
 save(df_pop_county, file = "~/GitHub/demog-model-mex/data/df_pop_county.Rdata")
 save(df_pop_county_ages, file = "~/GitHub/demog-model-mex/data/df_pop_county_ages.Rdata")
