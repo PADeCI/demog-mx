@@ -74,19 +74,46 @@ df_pop_county_ages <- df_pop_binded %>%
 # *****************************************************************************
 #### 01.04 Mortality projections                                           ####
 # *****************************************************************************
-df_mort_county_age <- data.table::fread(input = "data-raw/def_edad_proyecciones.csv",
+df_mort_county_age_sex <- data.table::fread(input = "data-raw/def_edad_proyecciones.csv",
         encoding="Latin-1")
-df_mort_county_age <- %>%
-rename(year = "AÑO", 
-        entidad = "NOM_ENT",
-        county_name_esp = "MUN", 
-        county_id = "CLAVE") %>%
-        rename(population = "POB", 
-                age_groups = "EDAD_QUIN") %>%
-        filter(year == 2020)
+
+# Df meant only for comparison 
+df_mort_county_age_sex_2020 <- df_mort_county_age_sex %>%
+        rename(year = "AÑO", 
+                entidad = "ENTIDAD",
+                deaths = "DEFUNCIONES", 
+                age = "EDAD",
+                state_id = "CVE_GEO") %>% 
+        filter(year == 2020) 
+
+df_mort_county_age <- df_mort_county_age_sex %>%
+        rename(year = "AÑO", 
+                entidad = "ENTIDAD",
+                deaths = "DEFUNCIONES", 
+                age = "EDAD",
+                state_id = "CVE_GEO") %>% 
+        filter(year == 2020) %>%
+        group_by(entidad, state_id, age) %>%
+        summarise_at("deaths", sum, na.rm = T)
+
+df_mort_county <- df_mort_county_age_sex %>%
+        rename(year = "AÑO", 
+                entidad = "ENTIDAD",
+                deaths = "DEFUNCIONES", 
+                age = "EDAD",
+                state_id = "CVE_GEO") %>% 
+        filter(year == 2020) %>%
+        group_by(entidad, state_id) %>%
+        summarise_at("deaths", sum, na.rm = T)
+
+# Check numbers 
+sum(df_mort_county_age_sex_2020$deaths)
+sum(df_mort_county_age$deaths)
+sum(df_mort_county$deaths)
 
 # *****************************************************************************
 #### 01.05_Save_data####
 # *****************************************************************************
 save(df_pop_county, file = "~/GitHub/demog-model-mex/data/df_pop_county.Rdata")
 save(df_pop_county_ages, file = "~/GitHub/demog-model-mex/data/df_pop_county_ages.Rdata")
+save(df_mort_county_age, file = "~/GitHub/demog-model-mex/data/df_mort_county_age.Rdata")
