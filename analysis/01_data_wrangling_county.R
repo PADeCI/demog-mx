@@ -63,14 +63,16 @@ df_pop_county_ages <- df_pop_binded %>%
         rename(pop_grouped = "population") %>%
         mutate(population = pop_grouped/5) %>%
         uncount(5) %>%
-        mutate(age = 0:69, 
-               age = as.character(age), 
-                age = case_when(age != 69 ~ age,
-                                age == 69 ~ "69+")) %>%
+        mutate(age = 0:69
+                #, age = as.character(age), 
+                #age = case_when(age != 69 ~ age,
+                                #age == 69 ~ "69+")
+        ) %>%
+        complete(age = 0:109, fill = 0) %>% # Create a sequence of dates
         select(entidad, county_name_esp, county_id, age_groups, pop_grouped, age, population)
 
-#View(df_pop_county_ages)
-
+ sum(df_pop_county_ages$population, na.rm = T)       
+        
 # *****************************************************************************
 #### 01.04 Mortality projections                                           ####
 # *****************************************************************************
@@ -117,3 +119,4 @@ sum(df_mort_county$deaths)
 save(df_pop_county, file = "~/GitHub/demog-model-mex/data/df_pop_county.Rdata")
 save(df_pop_county_ages, file = "~/GitHub/demog-model-mex/data/df_pop_county_ages.Rdata")
 save(df_mort_county_age, file = "~/GitHub/demog-model-mex/data/df_mort_county_age.Rdata")
+
