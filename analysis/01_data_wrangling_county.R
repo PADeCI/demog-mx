@@ -114,6 +114,6 @@ sum(df_mort_county$deaths)
 #### 01.05_Save_data####
 # *****************************************************************************
 save(df_pop_county, file = "~/GitHub/demog-model-mex/data/df_pop_county.Rdata")
-save(df_pop_county_age, file = "~/GitHub/demog-model-mex/data/df_pop_county_ages.Rdata")
+save(df_pop_county_age, file = "~/GitHub/demog-model-mex/data/df_pop_county_age.Rdata")
 save(df_mort_county_age, file = "~/GitHub/demog-model-mex/data/df_mort_county_age.Rdata")
 
