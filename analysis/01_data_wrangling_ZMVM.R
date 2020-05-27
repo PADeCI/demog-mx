@@ -262,6 +262,16 @@ df_pop_mort_ZMVM <- df_pop_mort_age_ZMVM %>%
   group_by(country, pais, state, entidad, county, municipio) %>%
   summarise_at(vars("deaths", "population"), list(sum), na.rm = T)
 
+
+# Check consistency of data at different df 
+sum(df_pop_ZMVM$population, na.rm = T)
+sum(df_pop_ZMVM_ages$population, na.rm = T)
+sum(df_pop_mort_age_ZMVM$population, na.rm = T)
+sum(df_pop_mort_ZMVM$population, na.rm = T)
+
+sum(df_pop_mort_age_ZMVM$deaths, na.rm = T)
+sum(df_pop_mort_ZMVM$deaths, na.rm = T)
+
 # *****************************************************************************
 #### 01.04_Save_data####
 # *****************************************************************************
