@@ -22,7 +22,7 @@ library(dplyr)
 #### 01.02_Load_data                                                       ####
 # *****************************************************************************
 load("~/GitHub/demog-model-mex/data/df_pop_county.Rdata")
-load("~/GitHub/demog-model-mex/data/df_pop_county_ages.Rdata")
+load("~/GitHub/demog-model-mex/data/df_pop_county_age.Rdata")
 load("~/GitHub/demog-model-mex/data/df_mort_county_age.Rdata")
 
 
@@ -119,7 +119,7 @@ df_pop_ZMVM <- df_pop_ZMVM_counties %>%
   select(entidad, county_name_esp, state, county_name_eng, population)
 
 #### ZMVM population per ages
-df_pop_ZMVM_couties_ages <- df_pop_county_ages %>%
+df_pop_ZMVM_couties_age <- df_pop_county_age %>%
   mutate (ZMVM = case_when(county_id == "9002" ~ 1,
     county_id == "9003"~ 1,
     county_id == "9004" ~ 1,
@@ -199,7 +199,7 @@ df_pop_ZMVM_couties_ages <- df_pop_county_ages %>%
   filter(ZMVM == 1)
 
 # Cleanup
-df_pop_ZMVM_ages <- df_pop_ZMVM_couties_ages %>%
+df_pop_ZMVM_age <- df_pop_ZMVM_couties_age %>%
   group_by(age) %>%
   summarise(population_ag = sum(population), 
             pop_grouped_ag = sum(pop_grouped)) %>%
@@ -222,12 +222,12 @@ df_pop_ZMVM_ages <- df_pop_ZMVM_couties_ages %>%
 
 # Test total population
 sum(df_pop_ZMVM$population) 
-sum(df_pop_ZMVM_ages$population, na.rm = T)
+sum(df_pop_ZMVM_age$population, na.rm = T)
 
 # *****************************************************************************
 #### 01.04 Mortality Projections ####
 # *****************************************************************************
-df_pop_mort_age_ZMVM_counties <- df_pop_ZMVM_couties_ages  %>%
+df_pop_mort_age_ZMVM_counties <- df_pop_ZMVM_couties_age  %>%
   mutate(state_id = substr(county_id, 1, 2), 
           age = as.numeric(age)) %>%
   mutate(state_id = case_when((state_id == 90 ~ 9),
@@ -235,9 +235,6 @@ df_pop_mort_age_ZMVM_counties <- df_pop_ZMVM_couties_ages  %>%
                               (state_id == 15 ~ 15))) %>%
   full_join(df_mort_county_age, by = c("entidad", "state_id", "age")) %>%
   mutate(deaths = as.numeric(deaths))
-
-sum(df_pop_mort_ZMVM_age$population, na.rm = T)  
-sum(df_pop_mort_ZMVM_age$deaths)  
 
 
 # Collapse information
@@ -252,11 +249,6 @@ df_pop_mort_age_ZMVM <- df_pop_mort_age_ZMVM_counties %>%
       county = "MCMA") %>%
   select(country, state, county, pais, entidad, municipio, age, population, deaths)
 
-
-
-sum(df_pop_mort_age_ZMVM$population, na.rm = T)
-sum(df_pop_mort_age_ZMVM$deaths, na.rm = T)
-
 # Collapse ages
 df_pop_mort_ZMVM <- df_pop_mort_age_ZMVM %>%
   group_by(country, pais, state, entidad, county, municipio) %>%
@@ -265,7 +257,9 @@ df_pop_mort_ZMVM <- df_pop_mort_age_ZMVM %>%
 
 # Check consistency of data at different df 
 sum(df_pop_ZMVM$population, na.rm = T)
-sum(df_pop_ZMVM_ages$population, na.rm = T)
+sum(df_pop_ZMVM_age$population, na.rm = T)
+
+sum(df_pop_mort_age_ZMVM_counties$population, na.rm = T)
 sum(df_pop_mort_age_ZMVM$population, na.rm = T)
 sum(df_pop_mort_ZMVM$population, na.rm = T)
 
@@ -273,9 +267,55 @@ sum(df_pop_mort_age_ZMVM$deaths, na.rm = T)
 sum(df_pop_mort_ZMVM$deaths, na.rm = T)
 
 # *****************************************************************************
-#### 01.04_Save_data####
+#### 01.05_Merge_with_state_data      ####
+# *****************************************************************************
+# Load state data
+load("~/GitHub/demog-model-mex/data/df_mort_state_age.Rdata")
+load("~/GitHub/demog-model-mex/data/df_pop_state_age.Rdata")
+
+# Clean data so it matches ZMVM data
+df_pop_state_age_cleaned <-  df_pop_state_age %>%
+      mutate(pais = "México",
+        entidad = state, 
+        municipio = state,
+        country = "Mexico", 
+        county = state) %>%
+      filter(year == 2020) 
+  
+df_mort_state_age_cleaned <- df_mort_state_age %>%
+      mutate(pais = "México",
+        entidad = state, 
+        municipio = state,
+        country = "Mexico", 
+        county = state) %>%
+        filter(year == 2020)
+
+df_pop_mort_age_states <- df_mort_state_age_cleaned %>%
+      full_join(df_pop_state_age_cleaned) %>%
+      select(country, state, county, pais, entidad, municipio, age, population, deaths) 
+
+# Check info
+table(df_pop_mort_age_states$country) # Only one country
+table(df_pop_mort_age_states$state) # All states and a national register
+sum(df_pop_mort_age_states$population) # Total population (duplicated because of national register)
+sum(df_pop_mort_age_states$deaths) # Total deaths (duplicated because of national register)
+
+### Merge with ZMVM data ###
+df_pop_mort_age_states_ZMVM <- df_pop_mort_age_states %>%
+  bind_rows(df_pop_mort_age_ZMVM)
+
+# Check info
+table(df_pop_mort_age_states_ZMVM$country) # Only one country
+table(df_pop_mort_age_states_ZMVM$state) # All states, a national register and MCMA register
+sum(df_pop_mort_age_states_ZMVM$population)
+sum(df_pop_mort_age_states_ZMVM$deaths)
+
+
+# *****************************************************************************
+#### 01.05¿6_Save_data####
 # *****************************************************************************
 save(df_pop_ZMVM, file = "~/GitHub/demog-model-mex/data/df_pop_ZMVM.Rdata")
-save(df_pop_ZMVM_ages, file = "~/GitHub/demog-model-mex/data/df_pop_ZMVM_ages.Rdata")
+save(df_pop_ZMVM_age, file = "~/GitHub/demog-model-mex/data/df_pop_ZMVM_age.Rdata")
 save(df_pop_mort_ZMVM, file = "~/GitHub/demog-model-mex/data/df_pop_mort_ZMVM.Rdata")
-save(df_pop_mort_age_ZMVM, file = "~/GitHub/demog-model-mex/data/df_pop_mort_age_ZMVM.Rdata" ) 
+save(df_pop_mort_age_ZMVM, file = "~/GitHub/demog-model-mex/data/df_pop_mort_age_ZMVM.Rdata") 
+save(df_pop_mort_age_states_ZMVM, file = "~/GitHub/demog-model-mex/data/df_pop_mort_age_states_ZMVM.Rdata")
