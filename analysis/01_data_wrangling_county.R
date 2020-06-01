@@ -87,9 +87,20 @@ df_pop_county_age_2 <- df_pop_county_age_1 %>%
         # Then we divide this number by the amount of years missing (109-64)
 
 # Compare total population
+sum(df_pop_county_age_2$population)
 sum(df_pop_county$population, na.rm = T) - sum(df_pop_county_age_2$population, na.rm = T)
 sum(df_pop_county_age_1$population, na.rm = T)-sum(df_pop_county_age_2$population, na.rm = T)
 sum(df_pop_county_age_2$pop_grouped, na.rm = T)/5 -sum(df_pop_county_age_1$population, na.rm = T)
+
+# Test by age group
+df_test_grouped  <- df_pop_county_age_1 %>%
+        filter(age >= 65)
+
+df_test_expanded <- df_pop_county_age_2 %>%
+        filter(age >= 65)
+
+sum(df_test_grouped$population, na.rm = T)
+sum(df_test_expanded$population)
 
 # Searching the population decrease pattern in state data
 #load("~/GitHub/demog-model-mex/data/df_pop_state_age.Rdata")
