@@ -30,7 +30,7 @@ df_names <- data.table::fread(input = "~/GitHub/demog-model-mex/data-raw/municip
 
 
 # *****************************************************************************
-#### 01.03 Population projections                       ####
+#### 01.03 Population projections                                          ####
 # *****************************************************************************
 #### 01.03.1 County population
 df_pop_binded <- df_counties_1 %>%
@@ -57,7 +57,8 @@ df_pop_county <- df_pop_county_full %>%
 
 
 #### 01.03.2 County population per ages
-df_pop_county_age <- df_pop_binded %>%
+# Assuming population of ages above 69 are equal to 0 
+df_pop_county_age_1 <- df_pop_binded %>%
         group_by(entidad, county_name_esp, county_id, age_groups) %>%
         summarise_at("population", sum, na.rm = TRUE) %>%
         rename(pop_grouped = "population") %>%
@@ -65,11 +66,51 @@ df_pop_county_age <- df_pop_binded %>%
         uncount(5) %>%
         mutate(age = 0:69) %>%
         # Expand to 109 to match death df
-        complete(age = 0:109, fill = list(0)) %>% 
+        complete(age = 0:109, fill = list(0)) %>%
+        mutate(age = as.numeric(age)) %>%
         select(entidad, county_name_esp, county_id, age_groups, pop_grouped, age, population)
 
- sum(df_pop_county_age$population, na.rm = T)       
-        
+# Compare total population 
+sum(df_pop_county$population, na.rm = T)
+sum(df_pop_county_age_1$population, na.rm = T)       
+sum(df_pop_county$population, na.rm = T) - sum(df_pop_county_age_1$population, na.rm = T)       
+
+
+# Assuming there is the same amount of population for all ages above 64
+df_pop_county_age_2 <- df_pop_county_age_1 %>% 
+        mutate(population = as.numeric(population), 
+                age = as.numeric(age)) %>%
+        mutate(population = case_when(
+                age <= 64 ~ population, 
+                age >= 65 ~ (population[age == 65])*5/45)) 
+        # Population at age 65 it's first multiplied by 5 since we need the grouped value of 65-69 population
+        # Then we divide this number by the amount of years missing (109-64)
+
+# Compare total population
+sum(df_pop_county$population, na.rm = T) - sum(df_pop_county_age_2$population, na.rm = T)
+sum(df_pop_county_age_1$population, na.rm = T)-sum(df_pop_county_age_2$population, na.rm = T)
+sum(df_pop_county_age_2$pop_grouped, na.rm = T)/5 -sum(df_pop_county_age_1$population, na.rm = T)
+
+# Searching the population decrease pattern in state data
+#load("~/GitHub/demog-model-mex/data/df_pop_state_age.Rdata")
+#
+#df_pop_state_age_test <- df_pop_state_age %>%
+#        mutate(pop_dif = population - lag(population), 
+#                pop_did2 = pop_dif - lag(pop_dif))
+
+# Assuming there is the same amount of population decreases by half each year after age 65
+#df_pop_county_age_3 <- df_pop_county_age_1 %>%
+#        mutate(population = as.numeric(population), 
+#                age = as.numeric(age)) %>%
+#        mutate(population = case_when(
+#                        age <= 64 ~ population, 
+#                        age == 65 ~ (population[age == 65])*5/2)) %>%
+#        mutate(population = case_when(
+#                        age <= 65 ~ population, 
+#                        age == 66 ~ lag(population)/2))
+
+df_pop_county_age <- df_pop_county_age_2
+
 # *****************************************************************************
 #### 01.04 Mortality projections                                           ####
 # *****************************************************************************
