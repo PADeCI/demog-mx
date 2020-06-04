@@ -27,6 +27,7 @@ df_counties_2 <- data.table::fread(input = "~/GitHub/demog-model-mex/data-raw/ba
         encoding = "Latin-1")
 df_names <- data.table::fread(input = "~/GitHub/demog-model-mex/data-raw/municipios_nombres.csv", 
         encoding = "Latin-1")
+load(file = "data/df_pop_state_age.Rdata")
 
 
 # *****************************************************************************
@@ -103,24 +104,36 @@ sum(df_test_grouped$population, na.rm = T)
 sum(df_test_expanded$population)
 
 # Searching the population decrease pattern in state data
-#load("~/GitHub/demog-model-mex/data/df_pop_state_age.Rdata")
-#
-#df_pop_state_age_test <- df_pop_state_age %>%
-#        mutate(pop_dif = population - lag(population), 
-#                pop_did2 = pop_dif - lag(pop_dif))
+# Get the ratio of population for all ages >= 65
+df_pop_age_ratio_cdmx <- df_pop_state_age %>%
+        filter(year == 2020, 
+                state == "Mexico City", 
+                age >= 65) %>%
+        mutate(pop_tot = sum(population), 
+                age_pop_ratio = population/pop_tot*100) %>%
+        select(age, age_pop_ratio)
 
-# Assuming there is the same amount of population decreases by half each year after age 65
-#df_pop_county_age_3 <- df_pop_county_age_1 %>%
-#        mutate(population = as.numeric(population), 
-#                age = as.numeric(age)) %>%
-#        mutate(population = case_when(
-#                        age <= 64 ~ population, 
-#                        age == 65 ~ (population[age == 65])*5/2)) %>%
-#        mutate(population = case_when(
-#                        age <= 65 ~ population, 
-#                        age == 66 ~ lag(population)/2))
+# Assuming there is the same proportion of population after 65 than at the national level
+df_pop_county_age_3 <- df_pop_county_age_1 %>%
+        mutate(population = as.numeric(population), 
+                pop_grouped = as.numeric(population), 
+                age = as.numeric(age)) %>%
+        left_join(df_pop_age_ratio_cdmx, by = "age") %>%
+        mutate(population = case_when(
+                age <= 64 ~ population,
+                age >= 65 ~ (pop_grouped[age == 65]))) %>%
+        mutate(population = case_when(
+                age <= 64 ~ population,
+                age >= 65 ~ (population*age_pop_ratio/100))) %>%
+        mutate(population = as.integer(population)) %>%
+        select(entidad, county_name_esp, county_id, age, population)
 
-df_pop_county_age <- df_pop_county_age_2
+        
+sum(df_pop_county$population, na.rm = T) - sum(df_pop_county_age_3$population, na.rm = T)
+sum(df_pop_county_age_3$population)
+
+# Select final df according to desired assumption
+df_pop_county_age <- df_pop_county_age_3
 
 # *****************************************************************************
 #### 01.04 Mortality projections                                           ####
