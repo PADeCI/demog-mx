@@ -58,7 +58,7 @@ df_pop_county <- df_pop_county_full %>%
 
 
 #### 01.03.2 County population per ages
-# Assuming population of ages above 69 are equal to 0 
+# A. Assuming population of ages above 69 are equal to 0 
 df_pop_county_age_1 <- df_pop_binded %>%
         group_by(entidad, county_name_esp, county_id, age_groups) %>%
         summarise_at("population", sum, na.rm = TRUE) %>%
@@ -77,7 +77,7 @@ sum(df_pop_county_age_1$population, na.rm = T)
 sum(df_pop_county$population, na.rm = T) - sum(df_pop_county_age_1$population, na.rm = T)       
 
 
-# Assuming there is the same amount of population for all ages above 64
+# B. Assuming there is the same amount of population for all ages above 64
 df_pop_county_age_2 <- df_pop_county_age_1 %>% 
         mutate(population = as.numeric(population), 
                 age = as.numeric(age)) %>%
@@ -103,6 +103,8 @@ df_test_expanded <- df_pop_county_age_2 %>%
 sum(df_test_grouped$population, na.rm = T)
 sum(df_test_expanded$population)
 
+
+# C. Assuming there is the same proportion of population after 65 than at the national level
 # Searching the population decrease pattern in state data
 # Get the ratio of population for all ages >= 65
 df_pop_age_ratio_cdmx <- df_pop_state_age %>%
@@ -113,24 +115,34 @@ df_pop_age_ratio_cdmx <- df_pop_state_age %>%
                 age_pop_ratio = population/pop_tot*100) %>%
         select(age, age_pop_ratio)
 
-# Assuming there is the same proportion of population after 65 than at the national level
-df_pop_county_age_3 <- df_pop_county_age_1 %>%
-        mutate(population = as.numeric(population), 
-                pop_grouped = as.numeric(population), 
-                age = as.numeric(age)) %>%
-        left_join(df_pop_age_ratio_cdmx, by = "age") %>%
-        mutate(population = case_when(
-                age <= 64 ~ population,
-                age >= 65 ~ (pop_grouped[age == 65]))) %>%
-        mutate(population = case_when(
-                age <= 64 ~ population,
-                age >= 65 ~ (population*age_pop_ratio/100))) %>%
-        mutate(population = as.integer(population)) %>%
-        select(entidad, county_name_esp, county_id, age, population)
+# Copy the grouped value to all ages above 64 
+df_pop_county_age_3 <- df_pop_county_age_1%>%
+                 mutate(population = as.numeric(population), 
+                 pop_grouped = as.numeric(population), 
+                 age = as.numeric(age)) %>%
+                 left_join(df_pop_age_ratio_cdmx, by = "age") %>%
+                 mutate(population = case_when(
+                         age <= 64 ~ population,
+                         age >= 65 ~ (pop_grouped[age == 65]))) %>%
+                 mutate(population = case_when(
+                         age <= 64 ~ population,
+                         age >= 65 ~ (population*age_pop_ratio/100))) %>%
+                 mutate(population = as.integer(population)) %>%
+                 select(entidad, county_name_esp, county_id, age, population)
 
-        
-sum(df_pop_county$population, na.rm = T) - sum(df_pop_county_age_3$population, na.rm = T)
+# Get the population ratio for each age
+age_ratio <- (df_pop_age_ratio_cdmx$age_pop_ratio)/100
+
+# Get the required lenght, repeat as many times as counties there are
+age_ratio <- rep(age_ratio, 2457)
+
+# Multiply the grouped population by it's weight 
+df_pop_county_age_3$population[df_pop_county_age_3$age >= 65] <- (df_pop_county_age_3$population[df_pop_county_age_3$age >= 65])*age_ratio
+
+# Check total population
+sum(df_pop_county$population, na.rm = T)
 sum(df_pop_county_age_3$population)
+sum(df_pop_county$population, na.rm = T) - sum(df_pop_county_age_3$population, na.rm = T)
 
 # Select final df according to desired assumption
 df_pop_county_age <- df_pop_county_age_3
