@@ -21,11 +21,11 @@ library(splitstackshape)
 # *****************************************************************************
 #### 01.02_Load_data####
 # *****************************************************************************
-df_counties_1 <- data.table::fread(input = "~/GitHub/demog-model-mex/data-raw/base_municipios_final_datos_01.csv",
+df_counties_1 <- data.table::fread(input = "data-raw/base_municipios_final_datos_01.csv",
         encoding = "Latin-1")
-df_counties_2 <- data.table::fread(input = "~/GitHub/demog-model-mex/data-raw/base_municipios_final_datos_02.csv",
+df_counties_2 <- data.table::fread(input = "data-raw/base_municipios_final_datos_02.csv",
         encoding = "Latin-1")
-df_names <- data.table::fread(input = "~/GitHub/demog-model-mex/data-raw/municipios_nombres.csv", 
+df_names <- data.table::fread(input = "data-raw/municipios_nombres.csv", 
         encoding = "Latin-1")
 
 
@@ -57,7 +57,7 @@ df_pop_county <- df_pop_county_full %>%
 
 
 #### 01.03.2 County population per ages
-df_pop_county_age <- df_pop_binded %>%
+df_pop_H <- df_pop_binded %>%
         group_by(entidad, county_name_esp, county_id, age_groups) %>%
         summarise_at("population", sum, na.rm = TRUE) %>%
         rename(pop_grouped = "population") %>%
@@ -65,10 +65,33 @@ df_pop_county_age <- df_pop_binded %>%
         uncount(5) %>%
         mutate(age = 0:69) %>%
         # Expand to 109 to match death df
-        complete(age = 0:109, fill = list(0)) %>% 
+        complete(age = 0:109, fill = list(0)) %>%
+        mutate(age = as.numeric(age)) %>%
         select(entidad, county_name_esp, county_id, age_groups, pop_grouped, age, population)
 
- sum(df_pop_county_age$population, na.rm = T)       
+df_pop_age_ratio_cdmx <- df_pop_state_age %>%
+        filter(year == 2020, 
+               state == "Mexico City", 
+               age >= 65) %>%
+        mutate(pop_tot = sum(population), 
+               age_pop_ratio = population/pop_tot) %>%
+        select(age, age_pop_ratio)
+
+
+df_pop_H_n65m <- df_pop_H %>% 
+        filter(age < 65)
+
+df_pop_H_65m <- df_pop_H %>% 
+        filter(age >= 65)%>% 
+        fill(pop_grouped) %>% 
+        left_join(df_pop_age_ratio_cdmx, by = "age") %>% 
+        mutate(population =  pop_grouped*age_pop_ratio) %>% 
+        mutate(population = as.numeric(population)) %>% 
+        select(c(1:7))
+
+df_pop_county_age <- rbind(df_pop_H_n65m,df_pop_H_65m) %>% 
+        arrange(county_id)
+
         
 # *****************************************************************************
 #### 01.04 Mortality projections                                           ####
@@ -113,7 +136,7 @@ sum(df_mort_county$deaths)
 # *****************************************************************************
 #### 01.05_Save_data####
 # *****************************************************************************
-save(df_pop_county, file = "~/GitHub/demog-model-mex/data/df_pop_county.Rdata")
-save(df_pop_county_age, file = "~/GitHub/demog-model-mex/data/df_pop_county_age.Rdata")
-save(df_mort_county_age, file = "~/GitHub/demog-model-mex/data/df_mort_county_age.Rdata")
+save(df_pop_county, file = "data/df_pop_county.Rdata")
+save(df_pop_county_age, file = "data/df_pop_county_age.Rdata")
+save(df_mort_county_age, file = "data/df_mort_county_age.Rdata")
 
