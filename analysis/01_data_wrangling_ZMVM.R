@@ -113,10 +113,10 @@ df_pop_ZMVM_counties <- df_pop_county %>%
 
 ###List of ZMVM countires
 list_ZMVM <- df_pop_ZMVM_counties %>% 
-  select(c(1,2,5))
+  select(c(1,2))
 
 
-View(df_pop_ZMVM_counties)
+View(list_ZMVM)
 
 # Clean up 
 df_pop_ZMVM <- df_pop_ZMVM_counties %>%
@@ -130,7 +130,7 @@ df_pop_ZMVM <- df_pop_ZMVM_counties %>%
 View(df_pop_ZMVM)
 
 #### ZMVM population per ages
-df_pop_ZMVM_couties_age <- df_pop_age_c %>%
+df_pop_ZMVM_couties_age <- df_pop_county_age %>%
   mutate (ZMVM = case_when(county_id == "9002" ~ 1,
     county_id == "9003"~ 1,
     county_id == "9004" ~ 1,
@@ -209,6 +209,9 @@ df_pop_ZMVM_couties_age <- df_pop_age_c %>%
     county_id == "15125"~ 1))  %>%
   filter(ZMVM == 1)
 
+
+view(df_pop_ZMVM_couties_age)
+
 # Cleanup
 df_pop_ZMVM_age <- df_pop_ZMVM_couties_age %>%
   mutate(estado = "ZMVM",
@@ -224,15 +227,17 @@ sum(df_pop_ZMVM_age$population, na.rm = T)
 # *****************************************************************************
 #### 01.04 Mortality Projections ####
 # *****************************************************************************
-df_pop_mort_age_ZMVM_counties <- df_pop_ZMVM_couties_age  %>%
-  mutate(state_id = substr(county_id, 1, 2), 
-          age = as.numeric(age)) %>%
-  mutate(state_id = case_when((state_id == 90 ~ 9),
-                              (state_id == 13 ~ 13),
-                              (state_id == 15 ~ 15))) %>%
-  full_join(df_mort_county_age, by = c("entidad", "state_id", "age")) %>%
-  mutate(deaths = as.numeric(deaths))
+df_mort_county <- data.table::fread(input = "data-raw/def_edad_proyecciones_rate.csv",
+                                    encoding="Latin-1")
+df_mort_county$PROP[df_mort_county$PROP %in% 1.250000000] <- 1
+df_mort_county$PROP[df_mort_county$PROP %in% 3.000000000] <- 1
 
+df_pop_mort_age_ZMVM_counties <- df_pop_ZMVM_couties_age %>% 
+  left_join(df_mort_county, by  = c("entidad" = "ENTIDAD", "age" = "EDAD")) %>% 
+  mutate(deaths = population*PROP) %>% 
+  select(c(1,2,3,4,5,6,7,15))
+
+View(df_pop_mort_age_ZMVM_counties)
 
 # Collapse information
 df_pop_mort_age_ZMVM <- df_pop_mort_age_ZMVM_counties %>%
@@ -242,9 +247,19 @@ df_pop_mort_age_ZMVM <- df_pop_mort_age_ZMVM_counties %>%
       entidad = "ZMVM", 
       municipio = "ZMVM", 
       country = "Mexico", 
-      state = "MCMA", 
+      state = "ZMVM", 
       county = "MCMA") %>%
   select(country, state, county, pais, entidad, municipio, age, population, deaths)
+
+df_mort_pop_state_age_ZMVM <- df_pop_mort_age_ZMVM %>% 
+  select(c(1,2,7,8,9)) %>% 
+  as.data.frame()
+view(df_mort_pop_state_age_ZMVM)
+class(df_mort_pop_state_age_ZMVM)
+
+df_mort_pop_state_age <- rbind(df_mort_pop_state_age,df_mort_pop_state_age_ZMVM)
+
+view(df_mort_pop_state_age)
 
 # Collapse ages
 df_pop_mort_ZMVM <- df_pop_mort_age_ZMVM %>%
@@ -314,6 +329,5 @@ sum(df_pop_mort_age_states_ZMVM$deaths)
 save(df_pop_ZMVM, file = "data/df_pop_ZMVM.Rdata")
 save(df_pop_ZMVM_age, file = "data/df_pop_ZMVM_age.Rdata")
 save(df_pop_mort_ZMVM, file = "data/df_pop_mort_ZMVM.Rdata")
-save(df_pop_mort_age_ZMVM, file = "data/df_pop_mort_age_ZMVM.Rdata") 
-save(df_pop_mort_age_states_ZMVM, file = "data/df_pop_mort_age_states_ZMVM.Rdata")
-
+save(df_pop_mort_age_ZMVM_counties, file = "data/df_pop_mort_age_ZMVM_counties.Rdata") 
+save(df_mort_pop_state_age, file = "data/df_mort_pop_state_age.Rdata")
