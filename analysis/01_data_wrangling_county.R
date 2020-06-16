@@ -55,6 +55,16 @@ df_pop_county <- df_pop_county_full %>%
         rename(county_name_esp = county_name_esp.x) %>%
         select(entidad, county_name_esp, county_name_eng, county_id, population)
 
+df_pop_county$entidad <- gsub("Oaxaca-Región Mixteca", "Oaxaca", df_pop_county$entidad)
+df_pop_county$entidad <- gsub("Oaxaca-Región Sierra Norte", "Oaxaca", df_pop_county$entidad)
+df_pop_county$entidad <- gsub("Oaxaca-Región Valles Centrales", "Oaxaca", df_pop_county$entidad)
+df_pop_county$entidad <- gsub("Oaxaca-Región Costa", "Oaxaca", df_pop_county$entidad)
+df_pop_county$entidad <- gsub("Oaxaca-Región Cañada", "Oaxaca", df_pop_county$entidad)
+df_pop_county$entidad <- gsub("Oaxaca-Región Sierra Sur", "Oaxaca", df_pop_county$entidad)
+df_pop_county$entidad <- gsub("Oaxaca-Región Istmo", "Oaxaca", df_pop_county$entidad)
+df_pop_county$entidad <- gsub("Oaxaca-Región Papaloapam", "Oaxaca", df_pop_county$entidad)
+
+view(df_pop_county)
 
 #### 01.03.2 County population per ages
 df_pop_H <- df_pop_binded %>%
@@ -68,6 +78,8 @@ df_pop_H <- df_pop_binded %>%
         complete(age = 0:109, fill = list(0)) %>%
         mutate(age = as.numeric(age)) %>%
         select(entidad, county_name_esp, county_id, age_groups, pop_grouped, age, population)
+
+view(df_pop_H)
 
 df_pop_age_ratio_cdmx <- df_pop_state_age %>%
         filter(year == 2020, 
@@ -92,46 +104,76 @@ df_pop_H_65m <- df_pop_H %>%
 df_pop_county_age <- rbind(df_pop_H_n65m,df_pop_H_65m) %>% 
         arrange(county_id)
 
-        
+df_pop_county_age$entidad <- gsub("Oaxaca-Región Mixteca", "Oaxaca", df_pop_county_age$entidad)
+df_pop_county_age$entidad <- gsub("Oaxaca-Región Sierra Norte", "Oaxaca", df_pop_county_age$entidad)
+df_pop_county_age$entidad <- gsub("Oaxaca-Región Valles Centrales", "Oaxaca", df_pop_county_age$entidad)
+df_pop_county_age$entidad <- gsub("Oaxaca-Región Costa", "Oaxaca", df_pop_county_age$entidad)
+df_pop_county_age$entidad <- gsub("Oaxaca-Región Cañada", "Oaxaca", df_pop_county_age$entidad)
+df_pop_county_age$entidad <- gsub("Oaxaca-Región Sierra Sur", "Oaxaca", df_pop_county_age$entidad)
+df_pop_county_age$entidad <- gsub("Oaxaca-Región Istmo", "Oaxaca", df_pop_county_age$entidad)
+df_pop_county_age$entidad <- gsub("Oaxaca-Región Papaloapam", "Oaxaca", df_pop_county_age$entidad)
+
+view(df_pop_county_age)
+
+       
 # *****************************************************************************
 #### 01.04 Mortality projections                                           ####
 # *****************************************************************************
-df_mort_county_age_sex <- data.table::fread(input = "data-raw/def_edad_proyecciones.csv",
+df_mort_county <- data.table::fread(input = "data-raw/def_edad_proyecciones_rate.csv",
         encoding="Latin-1")
+view(df_mort_county)
+
+df_pop_d_county_age <- df_pop_county_age %>% 
+        left_join(df_mort_county, by = c("entidad" = "ENTIDAD", "age" = "EDAD")) %>% 
+        mutate(deaths = population*PROP) %>% 
+        select(c(2,3,4,5,6,7,14))
+
+view(df_pop_d_county_age)
+
+df_mort_pop_state_age <- df_pop_d_county_age %>% 
+        group_by(entidad, age) %>% 
+        summarise(population =  sum(population), deaths =  sum(deaths)) %>% 
+        mutate(country = "Mexico") %>% 
+        select(c(5,1,2,3,4)) %>% 
+        as.data.frame()
+setnames(df_mort_pop_state_age, old = c("entidad"), new = c("state"))
+
+view(df_mort_pop_state_age)
+
 
 # Df meant only for comparison 
-df_mort_county_age_sex_2020 <- df_mort_county_age_sex %>%
-        rename(year = "AÑO", 
-                entidad = "ENTIDAD",
-                deaths = "DEFUNCIONES", 
-                age = "EDAD",
-                state_id = "CVE_GEO") %>% 
-        filter(year == 2020) 
-
-df_mort_county_age <- df_mort_county_age_sex %>%
-        rename(year = "AÑO", 
-                entidad = "ENTIDAD",
-                deaths = "DEFUNCIONES", 
-                age = "EDAD",
-                state_id = "CVE_GEO") %>% 
-        filter(year == 2020) %>%
-        group_by(entidad, state_id, age) %>%
-        summarise_at("deaths", sum, na.rm = T)
-
-df_mort_county <- df_mort_county_age_sex %>%
-        rename(year = "AÑO", 
-                entidad = "ENTIDAD",
-                deaths = "DEFUNCIONES", 
-                age = "EDAD",
-                state_id = "CVE_GEO") %>% 
-        filter(year == 2020) %>%
-        group_by(entidad, state_id) %>%
-        summarise_at("deaths", sum, na.rm = T)
-
-# Check numbers 
-sum(df_mort_county_age_sex_2020$deaths)
-sum(df_mort_county_age$deaths)
-sum(df_mort_county$deaths)
+#df_mort_county_age_sex_2020 <- df_mort_county_age_sex %>%
+#        rename(year = "AÑO", 
+#                entidad = "ENTIDAD",
+#                deaths = "DEFUNCIONES", 
+#                age = "EDAD",
+#                state_id = "CVE_GEO") %>% 
+#        filter(year == 2020) 
+#
+#df_mort_county_age <- df_mort_county_age_sex %>%
+#        rename(year = "AÑO", 
+#                entidad = "ENTIDAD",
+#                deaths = "DEFUNCIONES", 
+#                age = "EDAD",
+#                state_id = "CVE_GEO") %>% 
+#        filter(year == 2020) %>%
+#        group_by(entidad, state_id, age) %>%
+#        summarise_at("deaths", sum, na.rm = T)
+#
+#df_mort_county <- df_mort_county_age_sex %>%
+#        rename(year = "AÑO", 
+#                entidad = "ENTIDAD",
+#                deaths = "DEFUNCIONES", 
+#                age = "EDAD",
+#                state_id = "CVE_GEO") %>% 
+#        filter(year == 2020) %>%
+#        group_by(entidad, state_id) %>%
+#        summarise_at("deaths", sum, na.rm = T)
+#
+## Check numbers 
+#sum(df_mort_county_age_sex_2020$deaths)
+#sum(df_mort_county_age$deaths)
+#sum(df_mort_county$deaths)
 
 # *****************************************************************************
 #### 01.05_Save_data####
@@ -139,4 +181,4 @@ sum(df_mort_county$deaths)
 save(df_pop_county, file = "data/df_pop_county.Rdata")
 save(df_pop_county_age, file = "data/df_pop_county_age.Rdata")
 save(df_mort_county_age, file = "data/df_mort_county_age.Rdata")
-
+save(df_mort_pop_state_age, file = "data/df_mort_pop_state_age.Rdata")
