@@ -1,4 +1,4 @@
-# demog-model-mex
+# Datos demográficos de México
 A repository to compute and model demographic dynamics for Mexico
 
 
