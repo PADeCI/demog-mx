@@ -12,7 +12,7 @@ _____
 # VERSIÓN EN ESPAÑOL: Datos demográficos de México
 
 # Sobre este repositorio :open_book:
-[PADeCI](https://twitter.com/PADeCI1) es un equipo de investigación interdisciplinario ubicado en Aguascalientes, México. Con el contenido de este repostiorio se construyen diversas bases de datos de información demográfica de México, necesaria para los diferentes proyectos de PADeCI. Las series de tiempo poblacionales se construyen a partir de la información pública del Consejo Nacional de Población (Conapo). Gracias a las proyecciones realizadas, se cuenta con información desde 1950, hasta el año 2051. Además de la población en un año específico, también se incluyen proyecciones para el número de nacimientos y número de muertes. Hay bases para diferentes necesidades: desagregadas a nivel estatal, a nivel municipal, para la Zona Metropolitana del Valle de México (ZMVM); desagregadas por género y edad. Siguiendo el principio científico de _transparencia_, cualquier persona interesada puede replicar el proceso de limpieza y modelación de datos hecho por el equipo de PADeCI, usando el contenido de este repositorio.
+[PADeCI](https://twitter.com/PADeCI1) es un equipo de investigación interdisciplinario ubicado en Aguascalientes, México. Con el contenido de este repostiorio se construyen diversas bases de datos de información demográfica de México, necesaria para los diferentes proyectos de PADeCI. Las series de tiempo poblacionales se construyen a partir de la información pública del Consejo Nacional de Población (Conapo). Gracias a las proyecciones realizadas por el Conapo, se cuenta con información desde 1950, hasta el año 2051. Además de la población en un año específico, también se incluyen proyecciones para el número de nacimientoss y número de muertes. Hay bases para diferentes necesidades: desagregadas a nivel estatal, a nivel municipal, para la Zona Metropolitana del Valle de México (ZMVM); desagregadas por género y edad. Siguiendo el principio científico de _transparencia_, cualquier persona interesada puede replicar el proceso de limpieza y modelación de datos hecho por el equipo de PADeCI, usando el contenido de este repositorio.
 
 # Requisitos :computer:
 R version 3.6.2 (ésta es la versión recomendada para evitar errores en el código, también conocidos como _bugs_). 
@@ -21,6 +21,29 @@ R version 3.6.2 (ésta es la versión recomendada para evitar errores en el cód
 Cualquier persona puede replicar el trabajo de PADeCI, ya sea clonando este repositorio en su computadora o descargando archivos específicos. 
 
 # Descripción de las carpetas :card_index_dividers:
+**1. R:** En esta carpeta se ubica un archivo de código en R en el cual se crean dos funciones necesarias para el modelo demográfico no homogéneo.  
+
+**2. analysis:** En la carpeta de análisis se encuentran los archivos de código en R que se encargan de la limpieza de datos, las proyecciones demográficas, la creación del modelo y la verificación de que los datos sean consistentes entre sí y con las cifras oficiales.
+
+**3. data-raw:** 
+
+**4. data:** En la carpeta de datos se almacenan las bases de datos de formato R producto de los procesos de limpieza y modelación que se realiza con los códigos contenidos en la carpeta de análisis. Las diferentes bases de datos son posibles combinaicones de las siguientes características:
+
+- Variables demográfica
+  - Número de habitantes (población)  
+  - Número de nacimientos 
+  - Número de muertes 
+  
+- Niveles para desagregado 
+  - Estatal (incluye datos nacionales) 
+  - Municipal 
+  - Zonca Metropolitana del Valle de México (ZMVM) 
+  
+- Variables de caracterísitcas personales 
+  - Género 
+  - Edad
+  
+**5. documents:** La carpeta de documentos incluye los diccionarios de datos y fichas técnicas de Conapo sobre las bases de datos que son la fuente de información para este proyecto. 
 
 # Autoras y autores :writing_hand:
 Fernando Alarid-Escudero   | [GitHub](https://github.com/feralaes) | [Twitter](https://twitter.com/feralaes) |
@@ -44,6 +67,11 @@ R version 3.6.2 (this version is recommended to avoid potential bugs)
 Any user can either clone this repository in its own computer or download specific files in order to replicate PADeCI's job.
 
 # Folders' description :card_index_dividers:
+**1. R:**  
+**2. analysis:** 
+**3. data-raw:** 
+**4. data:** 
+**5. documents:** 
 
 # Authors :writing_hand:
 Fernando Alarid-Escudero   | [GitHub](https://github.com/feralaes) | [Twitter](https://twitter.com/feralaes) |
