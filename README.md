@@ -25,7 +25,7 @@ Cualquier persona puede replicar el trabajo de PADeCI, ya sea clonando este repo
 
 **2. analysis:** En la carpeta de análisis se encuentran los archivos de código en R que se encargan de la limpieza de datos, las proyecciones demográficas, la creación del modelo y la verificación de que los datos sean consistentes entre sí y con las cifras oficiales.
 
-**3. data-raw:** 
+**3. data-raw:** La carpeta de datos crudos incluye las diferentes bases de datos en formato csv publicadas por el Conapo, la información detallada sobre estas bases se encuentra en la carpeta de documentos.
 
 **4. data:** En la carpeta de datos se almacenan las bases de datos de formato R producto de los procesos de limpieza y modelación que se realiza con los códigos contenidos en la carpeta de análisis. Las diferentes bases de datos son posibles combinaicones de las siguientes características:
 
@@ -37,7 +37,7 @@ Cualquier persona puede replicar el trabajo de PADeCI, ya sea clonando este repo
 - Niveles para desagregado 
   - Estatal (incluye datos nacionales) 
   - Municipal 
-  - Zonca Metropolitana del Valle de México (ZMVM) 
+  - Zona Metropolitana del Valle de México (ZMVM) 
   
 - Variables de caracterísitcas personales 
   - Género 
@@ -67,11 +67,28 @@ R version 3.6.2 (this version is recommended to avoid potential bugs)
 Any user can either clone this repository in its own computer or download specific files in order to replicate PADeCI's job.
 
 # Folders' description :card_index_dividers:
-**1. R:**  
-**2. analysis:** 
-**3. data-raw:** 
-**4. data:** 
-**5. documents:** 
+**1. R:**  This folder stores a single R script that contains two functions needed for the non-homogeneous model. 
+
+**2. analysis:** The analysis folder contains R script files that manage data wrangling, demographic projections, modeling and verification for consistency among scripts themselves and official data. 
+
+**3. data-raw:** This folder includes several Conapo's data bases in csv format, detailed information of this data bases can be found in the documents folder. 
+
+**4. data:** The data foler has R data bases that are produced from wrangling and modeling scripts, which can be found at the analysis folder. Different data bases are combinations from the following characteristics: 
+- Demographic variables 
+  - Number of inhabitants (population) 
+  - Number of births 
+  - Number of deaths 
+  
+- Dissagregation levels 
+  - State (includes national data) 
+  - County 
+  - Mexico City Metropolitan Area (MCMA)
+  
+- Personal characteristic variables
+  - Gender
+  - Age
+
+**5. documents:** This folder contains Conapo's data dictionaries and technical reports regarding their data bases which constitute the primary source of information for this project. 
 
 # Authors :writing_hand:
 Fernando Alarid-Escudero   | [GitHub](https://github.com/feralaes) | [Twitter](https://twitter.com/feralaes) |
@@ -82,8 +99,11 @@ Regina Isabel Medina       | [GitHub](https://github.com/RMedina19) | [Twitter](
 
 Hirvin Díaz                | [GitHub](https://github.com/HirvinDiaz) | [Twitter](https://twitter.com/HazaelDiaz93) |
 
+________
 
-# List of Mexico City Metopolitan Area's counties:
+# Nota metodológica | Methology note :world_map:
+## Lista de municipios de la Zona Metropolinata del Valle de México (ZMVM) | Mexico City Metropolitan Area (MCMA)
+List of Mexico City Metopolitan Area's counties:
 - Azcapotzalco
 - Coyoacán
 - Cuajimalpa De Morelos
