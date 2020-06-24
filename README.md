@@ -101,8 +101,8 @@ Hirvin Díaz                | [GitHub](https://github.com/HirvinDiaz) | [Twitter
 
 ________
 
-# Nota metodológica | Methology note 
-Lista de municipios que constituyen la Zona Metropolinata del Valle de México (ZMVM) | List of counties that constitute the Mexico City Metropolitan Area (MCMA) :world_map:
+# Nota metodológica | Methology note :world_map:
+Lista de municipios que constituyen la Zona Metropolinata del Valle de México (ZMVM) | List of counties that constitute the Mexico City Metropolitan Area (MCMA) 
 - Azcapotzalco
 - Coyoacán
 - Cuajimalpa De Morelos
