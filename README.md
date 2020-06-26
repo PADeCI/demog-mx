@@ -20,7 +20,7 @@ R version 3.6.2 (ésta es la versión recomendada para evitar errores en el cód
 # Uso :inbox_tray:
 Cualquier persona puede replicar el trabajo de PADeCI, ya sea clonando este repositorio en su computadora o descargando archivos específicos. Los datos también se pueden utilizar sin necesidad de descargar, ni clonar el respositorio: basta con utilizar el url que GitHub provee de la base de datos específica que se desea utilizar en formato raw, a continuación se presenta un ejemplo de cómo acceder a los datos usando este método.
 
-## Ejemplo de uso de los datos (extracción directa del url con R)
+## Ejemplo de uso de los datos (extracción directa con url de GitHub desde R)
 1. Seleccionar la base de interés 
 El repositorio incluye numerosas bases de datos (más detalles en la sección de análisis en el apartado de descripción de las carpetas). En este caso utilizaremos la base de casos COVID-19  desagregada a nivel municipal actualizada el 4 de junio de 2020. 
 
@@ -104,7 +104,7 @@ R version 3.6.2 (this version is recommended to avoid potential bugs)
 # Usage :inbox_tray:
 Any user can either clone this repository in its own computer or download specific files in order to replicate PADeCI's job.It suffices with using the url of the raw format provided by GitHub of the data base of interest. A quick example of how to retrive data with the last method is shown below. 
 
-## Use example (extracting data directly from a url)
+## Use example (extracting data with GitHub's url from R)
 1. Select data base of interest
 The repository includes several data bases (more detail can be found in the analysis subsection in the folder's description section). In this case, we will use the COVID-19 data base disaggregated at a county level, updated on June 4th, 2020. 
 
