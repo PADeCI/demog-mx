@@ -5,7 +5,7 @@
 ![Build Status](https://img.shields.io/twitter/url?style=social)
 
 <p align="center">
-<img src = "https://github.com/PADeCI/demog-mx/blob/master/logo.png" alt="logo" width="200"/>
+<img src = "https://github.com/PADeCI/demog-mx/blob/master/logo.png" alt="logo" width="300"/>
 </p>  
 
 _____
