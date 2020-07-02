@@ -21,30 +21,34 @@ R version 3.6.2 (ésta es la versión recomendada para evitar errores en el cód
 Cualquier persona puede replicar el trabajo de PADeCI, ya sea clonando este repositorio en su computadora o descargando archivos específicos. Los datos también se pueden utilizar sin necesidad de descargar, ni clonar el respositorio: basta con utilizar el url que GitHub provee de la base de datos específica que se desea utilizar en formato raw, a continuación se presenta un ejemplo de cómo acceder a los datos usando este método.
 
 ## Ejemplo de uso de los datos (extracción directa con url de GitHub desde R)
-1. Seleccionar la base de interés 
+**1. Seleccionar la base de interés**
+
 El repositorio incluye numerosas bases de datos (más detalles en la sección de análisis en el apartado de descripción de las carpetas). En este caso utilizaremos la base de número de nacimientos anual desagreados por entidad federativa. 
 
-2. Obtener la url para el formato raw de la base de datos 
+**2. Obtener la url para el formato raw de la base de datos** 
+
 Una vez seleccionada la base que se utilizará, es necesario abrirla en formato raw y copiar el url que aparece en el navegador. 
 
 <p align="center">
-<img src = "https://github.com/PADeCI/demog-mx/blob/master/tutorial_demog1.1.png" alt="logo" width="700"/>
+<img src = "https://github.com/PADeCI/demog-mx/blob/master/tutorial_demog1.png" alt="logo" width="700"/>
 </p> 
 
 
 
 <p align="center">
-<img src = "https://github.com/PADeCI/demog-mx/blob/master/tutorial_demog2.1.png" alt="logo" width="700"/>
+<img src = "https://github.com/PADeCI/demog-mx/blob/master/tutorial_demog2.png" alt="logo" width="700"/>
 </p> 
 
 
-3. Importar base de datos directo de la url 
+**3. Importar base de datos directo de la url**
+
 Se usa el siguiente comando para crear el objeto en R que contendrá la base, nótese que utiliza el url de la base tipo raw de GitHub del paso anterior. 
 
 ```r
 mi_base <- read.csv("https://raw.githubusercontent.com/PADeCI/demog-mx/master/data/Estatal/df_birth_state.csv?token=AMIIVUKSWRAUEVCJQPGC5TK66YVHC")
 ```
-4. Explorar datos
+**4. Explorar datos**
+
 Para una exploración rápida de la base se puede utilizar el comando `head()` y para ver toda la base el comando `View()`. En este ejemplo sería: 
 
 ```r
@@ -55,7 +59,7 @@ A partir de este punto la persona puede decidir qué hacer con los datos y proce
 
 
 # Descripción de las carpetas :card_index_dividers:
-**1. R:** En esta carpeta se ubica un archivo de código en R en el cual se crean las funciones necesarias para la limpieza y el modelaje de datos.   
+**1. R:** En esta carpeta se ubica un archivo de código en R en el cual se crean dos funciones necesarias para el modelo demográfico no homogéneo.  
 
 **2. analysis:** En la carpeta de análisis se encuentran los archivos de código en R que se encargan de la limpieza de datos, las proyecciones demográficas, la creación del modelo y la verificación de que los datos sean consistentes entre sí y con las cifras oficiales.
 
@@ -105,30 +109,34 @@ R version 3.6.2 (this version is recommended to avoid potential bugs.)
 Any user can either clone this repository in its own computer or download specific files in order to replicate PADeCI's job.It suffices with using the url of the raw format provided by GitHub of the data base of interest. A quick example of how to retrive data with the last method is shown below. 
 
 ## Use example (extracting data with GitHub's url from R)
-1. Select data base of interest
+**1. Select data base of interest**
+
 The repository includes several data bases (more detail can be found in the analysis subsection in the folder's description section). In this case, we will use the data base for anual births dissagregated by state level. 
 
-2. Get the GitHub's url for the raw format of the data base
+**2. Get the GitHub's url for the raw format of the data base**
+
 Once the data base is chosen, it is necessary to open the raw format provided by GitHub and copy the url from the web navigator.
 
 <p align="center">
-<img src = "https://github.com/PADeCI/demog-mx/blob/master/tutorial_demog1.1.png" alt="logo" width="700"/>
+<img src = "https://github.com/PADeCI/demog-mx/blob/master/tutorial_demog1.png" alt="logo" width="700"/>
 </p> 
 
 
 
 <p align="center">
-<img src = "https://github.com/PADeCI/demog-mx/blob/master/tutorial_demog2.1.png" alt="logo" width="700"/>
+<img src = "https://github.com/PADeCI/demog-mx/blob/master/tutorial_demog2.png" alt="logo" width="700"/>
 </p> 
 
 
-3. Import data base directly from the url 
+**3. Import data base directly from the url** 
+
 The following command is used to create and R object that will contain the data base, the GitHub's url retrived in the last step must be used.
 
 ```r
 my_data <- read.csv("https://raw.githubusercontent.com/PADeCI/demog-mx/master/data/Estatal/df_birth_state.csv?token=AMIIVUKSWRAUEVCJQPGC5TK66YVHC")
 ```
-4. Explor data
+**4. Explore data**
+
 For a quick data exploration, the `head()` command  can be used; in order to see the whole data frame, `View()` command must be used. Following our example:
 
 ```r
@@ -138,7 +146,7 @@ View(my_data)
 At this stage, the person can decide what to do with data and proceed with her own analysis. 
 
 # Folders' description :card_index_dividers:
-**1. R:**  This folder stores a single R script that contains functions that are used for data cleaning and modeling. 
+**1. R:**  This folder stores a single R script that contains two functions needed for the non-homogeneous model. 
 
 **2. analysis:** The analysis folder contains R script files that manage data wrangling, demographic projections, modeling and verification for consistency among scripts themselves and official data. 
 
@@ -174,83 +182,3 @@ Hirvin Díaz                | [GitHub](https://github.com/HirvinDiaz) | [Twitter
 # License :scroll:
 This repository's content must be used under the terms and conditions of the [MIT License](LICENSE)
 
-________
-
-# Nota metodológica | Methology note :world_map:
-Lista de municipios que constituyen la Zona Metropolinata del Valle de México (ZMVM) | List of counties that constitute the Mexico City Metropolitan Area (MCMA) 
-- Azcapotzalco
-- Coyoacán
-- Cuajimalpa De Morelos
-- Gustavo A. Madero
-- Iztacalco
-- Iztapalapa
-- La Magdalena Contreras
-- Milpa Alta
-- Álvaro Obregón
-- Tláhuac
-- Tlalpan
-- Xochimilco
-- Benito Juárez
-- Cuauhtémoc
-- Miguel Hidalgo
-- Venustiano Carranza
-- Tizayuca
-- Acolman
-- Amecameca
-- Apaxco
-- Atenco
-- Atizapán De Zaragoza
-- Atlautla
-- Axapusco
-- Ayapango
-- Coacalco De Berriozábal
-- Cocotitlán
-- Coyotepec
-- Cuautitlán
-- Chalco
-- Chiautla
-- Chicoloapan
-- Chiconcuac
-- Chimalhuacán
-- Ecatepec De Morelos
-- Ecatzingo
-- Huehuetoca
-- Hueypoxtla
-- Huixquilucan
-- Isidro Fabela
-- Ixtapaluca
-- Jaltenco
-- Jilotzingo
-- Juchitepec
-- Melchor Ocampo
-- Naucalpan De Juárez
-- Nezahualcóyotl
-- Nextlalpan
-- Nicolás Romero
-- Nopaltepec
-- Otumba
-- Ozumba
-- Papalotla
-- La Paz
-- San Martín De Las Pirámides
-- Tecámac
-- Temamatla
-- Temascalapa
-- Tenango Del Aire
-- Teoloyucan
-- Teotihuacán
-- Tepetlaoxtoc
-- Tepetlixpa
-- Tepotzotlán
-- Tequixquiac
-- Texcoco
-- Tezoyuca
-- Tlalmanalco
-- Tlalnepantla De Baz
-- Tultepec
-- Tultitlán
-- Villa Del Carbón
-- Zumpango
-- Cuautitlán Izcalli
-- Valle De Chalco Solidaridad
-- Tonanitla
