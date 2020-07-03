@@ -86,6 +86,7 @@ A partir de este punto la persona puede decidir qué hacer con los datos y proce
 En el próximo lanzamiento de código se proveerá de un DOI para citar este repositorio. 
 
 # Autoras y autores :writing_hand:
+
 Fernando Alarid-Escudero   | [GitHub](https://github.com/feralaes) | [Twitter](https://twitter.com/feralaes) |
 ------------ | ------------- | -------------
 Andrea Luviano             | [GitHub](https://github.com/AndreaLuviano) | [Twitter](https://twitter.com/AndreaLuviano)
