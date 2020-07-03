@@ -59,7 +59,7 @@ A partir de este punto la persona puede decidir qué hacer con los datos y proce
 
 
 # Descripción de las carpetas :card_index_dividers:
-**1. R:** En esta carpeta se ubica un archivo de código en R en el cual se crean dos funciones necesarias para el modelo demográfico no homogéneo.  
+**1. R:** En esta carpeta se ubica el archivo de código que genera funciones de R para la modelación.   
 
 **2. analysis:** En la carpeta de análisis se encuentran los archivos de código en R que se encargan de la limpieza de datos, las proyecciones demográficas, la creación del modelo y la verificación de que los datos sean consistentes entre sí y con las cifras oficiales.
 
@@ -72,10 +72,9 @@ A partir de este punto la persona puede decidir qué hacer con los datos y proce
   - Número de nacimientos 
   - Número de muertes 
   
-- Niveles para desagregado 
-  - Estatal (incluye datos nacionales) 
+- Niveles de desagregación
+  - Estatal (incluye datos nacionales y de la Zona Metropolitana del Valle de México) 
   - Municipal 
-  - Zona Metropolitana del Valle de México (ZMVM) 
   
 - Variables de caracterísitcas personales 
   - Género 
@@ -146,7 +145,7 @@ View(my_data)
 At this stage, the person can decide what to do with data and proceed with her own analysis. 
 
 # Folders' description :card_index_dividers:
-**1. R:**  This folder stores a single R script that contains two functions needed for the non-homogeneous model. 
+**1. R:**  This folder stores a single R script that contains functions needed for modeling purposes.
 
 **2. analysis:** The analysis folder contains R script files that manage data wrangling, demographic projections, modeling and verification for consistency among scripts themselves and official data. 
 
@@ -159,9 +158,8 @@ At this stage, the person can decide what to do with data and proceed with her o
   - Number of deaths 
   
 - Dissagregation levels 
-  - State (includes national data) 
+  - State (includes national data and Mexico City Metropolitan Area) 
   - County 
-  - Mexico City Metropolitan Area (MCMA)
   
 - Personal characteristic variables
   - Gender
