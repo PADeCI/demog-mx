@@ -27,7 +27,7 @@ El repositorio incluye numerosas bases de datos (más detalles en la sección de
 
 **2. Obtener la url para el formato raw de la base de datos** 
 
-Una vez seleccionada la base que se utilizará, es necesario abrirla en formato raw y copiar el url que aparece en el navegador. 
+Una vez seleccionada la base que se utilizará, es necesario abrirla en formato raw  (ésta es la versión en html para los documentos que son almacenados en GitHub) y copiar el url que aparece en el navegador. 
 
 <p align="center">
 <img src = "https://github.com/PADeCI/demog-mx/blob/master/tutorial_demog1.png" alt="logo" width="700"/>
