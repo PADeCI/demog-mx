@@ -5,10 +5,9 @@
 [![Open Source Love png1](https://badges.frapsoft.com/os/v1/open-source.png?v=103)](https://github.com/ellerbrock/open-source-badges/)
 
 <p align="center">
-<img src = "https://github.com/PADeCI/demog-mx/blob/master/logo.png" alt="logo" width="300"/>
+<img src = "https://github.com/PADeCI/demog-mx/blob/master/logo.png" alt="foo" width="300"/>
 </p>  
 
-![logo!](https://github.com/PADeCI/demog-mx/blob/master/logo.png)
 _____
 # VERSIÓN EN ESPAÑOL: Datos demográficos de México
 
