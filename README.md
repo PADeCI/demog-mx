@@ -8,6 +8,7 @@
 <img src = "https://github.com/PADeCI/demog-mx/blob/master/logo.png" alt="logo" width="300"/>
 </p>  
 
+![logo!](https://github.com/PADeCI/demog-mx/blob/master/logo.png){:align="right" width="96px"}
 _____
 # VERSIÓN EN ESPAÑOL: Datos demográficos de México
 
