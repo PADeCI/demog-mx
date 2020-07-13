@@ -1,3 +1,5 @@
 theme: jekyll-theme-slate
 title: Datos démográficos de México 
 description: El repositorio demog-mx contiene los datos recopilados, procesados y creados por PADeCI para proyectos de análisis y modelación de datos.
+plugins:
+  - jemoji
