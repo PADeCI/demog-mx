@@ -171,6 +171,7 @@ At this stage, the person can decide what to do with data and proceed with her o
 A DOI will be published in the next repository's release.
 
 # Authors :writing_hand:
+
 Fernando Alarid-Escudero   | [GitHub](https://github.com/feralaes) | [Twitter](https://twitter.com/feralaes) |
 ------------ | ------------- | -------------
 Andrea Luviano             | [GitHub](https://github.com/AndreaLuviano) | [Twitter](https://twitter.com/AndreaLuviano)
