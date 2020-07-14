@@ -5,7 +5,7 @@
 [![Open Source Love png1](https://badges.frapsoft.com/os/v1/open-source.png?v=103)](https://github.com/ellerbrock/open-source-badges/)
 
 <p align="center">
-<img src = "https://github.com/PADeCI/demog-mx/blob/master/logo.png" alt="foo" width="300">
+<img src = "logo.png" alt="foo" width="300">
 </p>  
 
 _____
@@ -30,13 +30,13 @@ El repositorio incluye numerosas bases de datos (más detalles en la sección de
 Una vez seleccionada la base que se utilizará, es necesario abrirla en formato raw  (ésta es la versión en html para los documentos que son almacenados en GitHub) y copiar el url que aparece en el navegador. 
 
 <p align="center">
-<img src = "https://github.com/PADeCI/demog-mx/blob/master/tutorial_demog1.png" alt="logo" width="700"/>
+<img src = "tutorial_demog1.png" alt="foo" width="700"/>
 </p> 
 
 
 
 <p align="center">
-<img src = "https://github.com/PADeCI/demog-mx/blob/master/tutorial_demog2.png" alt="logo" width="700"/>
+<img src = "tutorial_demog2.png" alt="foo" width="700"/>
 </p> 
 
 
@@ -118,13 +118,13 @@ The repository includes several data bases (more detail can be found in the anal
 Once the data base is chosen, it is necessary to open the raw format provided by GitHub and copy the url from the web navigator.
 
 <p align="center">
-<img src = "https://github.com/PADeCI/demog-mx/blob/master/tutorial_demog1.png" alt="logo" width="700"/>
+<img src = "tutorial_demog1.png" alt="foo" width="700"/>
 </p> 
 
 
 
 <p align="center">
-<img src = "https://github.com/PADeCI/demog-mx/blob/master/tutorial_demog2.png" alt="logo" width="700"/>
+<img src = "tutorial_demog2.png" alt="foo" width="700"/>
 </p> 
 
 
