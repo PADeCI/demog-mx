@@ -30,10 +30,10 @@ points(rowSums(test_ns[, -1]), col = "red")
 points(rowSums(test.vec_ns[, -1]), pch = 2, col = "red")
 
 #### Non-stationary, age-structured demographic model ####
-load(file = "data/df_pop_state_age.Rdata")
-load(file = "data/df_pop_state.Rdata")
-load(file = "data/df_birthrate_state.Rdata")
-load(file = "data/df_mortrate_state_age.Rdata")
+load(file = "data/Estatal/df_pop_state_age.Rdata")
+load(file = "data/Estatal/df_pop_state.Rdata")
+load(file = "data/Estatal/df_birthrate_state.Rdata")
+load(file = "data/Estatal/df_mortrate_state_age.Rdata")
 v_times <- 0:100
 n_times <- length(v_times)
 parm_ns <- list()#parm
