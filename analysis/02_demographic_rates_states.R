@@ -24,8 +24,8 @@ library(dplyr)
 #### 02.02_Birth Rates Projections ####
 # *****************************************************************************
 ### Load population and birth projections by age
-load(file = "data/df_pop_state_age.Rdata")
-load(file = "data/df_birth_state_age.Rdata")
+load(file = "data/Estatal/df_pop_state_age.Rdata")
+load(file = "data/Estatal/df_birth_state_age.Rdata")
 
 ### Join data.frames
 df_birthrate_state_age <- inner_join(df_pop_state_age, 
@@ -35,8 +35,8 @@ df_birthrate_state_age <- df_birthrate_state_age %>%
   mutate(birth_rate = births/population) 
 
 ### Load population and birth projections
-load(file = "data/df_pop_state.Rdata")
-load(file = "data/df_birth_state.Rdata")
+load(file = "data/Estatal/df_pop_state.Rdata")
+load(file = "data/Estatal/df_birth_state.Rdata")
 
 ### Join data.frames
 df_birthrate_state <- inner_join(df_pop_state, 
@@ -46,7 +46,7 @@ df_birthrate_state <- df_birthrate_state %>%
   mutate(birth_rate = births/population)
 
 ### Load population and by age and sex
-load(file = "data/df_pop_state_age_sex.Rdata")
+load(file = "data/Estatal/df_pop_state_age_sex.Rdata")
 
 ### Create data.frame with fertility rate and female variable
 df_birthrate_state_age_fmale <- df_birth_state_age %>% 
